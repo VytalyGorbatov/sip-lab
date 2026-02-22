@@ -1,0 +1,53 @@
+services:
+  server:
+    build: ./server
+    container_name: sip_server
+    networks: [sipnet]
+    ports:
+      - "5060:5060/udp"
+    volumes:
+      - shared-data:/opt/shared
+
+  sip_caller:
+    build: ./user
+    container_name: sip_caller
+    networks: [sipnet]
+    environment:
+      - SERVER_ADDR=sip_server
+    volumes:
+      - shared-data:/opt/shared
+      - scenarios-data:/opt/sipp-scenarios
+    depends_on: [server]
+    stdin_open: true
+    tty: true
+
+  sip_callee:
+    build: ./user
+    container_name: sip_callee
+    networks: [sipnet]
+    environment:
+      - SERVER_ADDR=sip_server
+    volumes:
+      - shared-data:/opt/shared
+      - scenarios-data:/opt/sipp-scenarios
+    depends_on: [server]
+    stdin_open: true
+    tty: true
+
+networks:
+  sipnet:
+    driver: bridge
+
+volumes:
+  shared-data:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: /Users/vhorbato/Desktop/NeuralNetworks/SIP_Docker/sip-lab/shared
+  scenarios-data:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: /Users/vhorbato/Desktop/NeuralNetworks/SIP_Docker/sip-lab/user/sipp-scenarios
