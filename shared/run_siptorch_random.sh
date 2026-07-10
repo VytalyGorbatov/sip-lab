@@ -113,7 +113,7 @@ for ((i=1; i<=N; i++)); do
   FROM_HDR="\"${caller_name}\" <sip:${caller_uri}@${CALLER_IP}:${caller_port}>"
   TO_HDR="\"${callee_name}\" <sip:${callee_endpoint}@${CALLEE_IP}:5060>"
 
-  cmd=(python3 "$SIPTORCH_PY" -t 3 -u "$SIP_SERVER" -p 5060 -P "$caller_port" -e "$callee_endpoint" -F "$FROM_HDR" -T "$TO_HDR" --user-agent "SIPp")
+  cmd=(python3 "$SIPTORCH_PY" -t 3 -u "$SIP_SERVER" -p 5060 -P "$caller_port" -e "$callee_endpoint" -F "$FROM_HDR" -T "$TO_HDR")
   log_file="$LOG_DIR/iter_$(pad $i).log"
   echo "[$(pad $i)/$N] ${cmd[*]}" # Display command
 
