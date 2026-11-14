@@ -1,8 +1,8 @@
 [submodule "shared/SIPTorch"]
 	path = shared/SIPTorch
-	url = git@github-personal:VytalyGorbatov/SIPTorch.git
+	url = git@github.com:VytalyGorbatov/SIPTorch.git
 	branch = shuffle
 [submodule "user/sipp-scenarios"]
 	path = user/sipp-scenarios
-	url = git@github-personal:VytalyGorbatov/sipp-scenarios.git
+	url = git@github.com:VytalyGorbatov/sipp-scenarios.git
 	branch = mutability
